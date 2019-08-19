@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple App</title>
+</head>
+<body>
+    <button id="btnServer">Get Server Time</button>
+    <div id="output"></div>
+
+    <hr>
+
+    <p>Enter Marks Here
+        <input id="txtMarks">
+        <button id="btnCheck">Get Result</button>
+        <div id="result-output"></div>
+    </p>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $("#btnServer").click(function(){
+            var ajaxConfig = {
+                url:"http://localhost:8080/simple/date",
+                method: "GET",
+                async: true
+            }
+            $.ajax(ajaxConfig).done(function(response){
+                $("#output").html(response);
+            });
+        });
+
+        $("#btnCheck").click(function(){
+           var ajaxConfig = {
+               url:"http://localhost:8080/simple/result",
+               method: "GET",
+               async: true,
+               data:{
+                   "marks":$("#txtMarks").val()
+               }
+           } ;
+           $.ajax(ajaxConfig).done(function(response){
+               $("#result-output").html(response);
+           })
+        });
+    </script>
+</body>
+</html>
